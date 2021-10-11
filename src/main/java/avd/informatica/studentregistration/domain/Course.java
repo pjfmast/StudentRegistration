@@ -1,32 +1,40 @@
 package avd.informatica.studentregistration.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+/*
+we are using a new annotation @JsonIdentityInfo.
+In the previous aricles, we have StackOverflow errors due to circular references.
+We have been using @JsonIgnore, @JsonManagedReference, and @JsonBackReference to take care of the error.
+This new annotation, @JsonIdentityInfo, will handle the circular reference errors for us.
+ */
+@lombok.Setter
+@lombok.Getter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Course {
-    @lombok.Setter
-    @lombok.Getter
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @lombok.Setter
-    @lombok.Getter
     private String title;
-    @lombok.Setter
-    @lombok.Getter
     private String description;
-    @lombok.Setter
-    @lombok.Getter
     private int capacity;
-    @lombok.Setter
-    @lombok.Getter
     private LocalDate startDate;
-    @lombok.Setter
-    @lombok.Getter
     private LocalDate endDate;
+
+    // Add many-to-many relation between Course and Student
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students;
 
     public Course(String title, String description, int capacity, LocalDate startDate, LocalDate endDate) {
         this.title = title;
@@ -38,4 +46,5 @@ public class Course {
 
     public Course() {
     }
+
 }

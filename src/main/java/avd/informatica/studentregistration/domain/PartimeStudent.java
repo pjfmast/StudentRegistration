@@ -6,9 +6,9 @@ import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
+@lombok.Setter
+@lombok.Getter
 public class PartimeStudent extends Student {
-    @lombok.Setter
-    @lombok.Getter
     private String workingEnvironment;
 
     public PartimeStudent(String name, LocalDate dayOfBirth, String workingEnvironment) {
