@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+// todo workshop lesson 7-3b: create RegistrationService
+
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
     private final StudentRepository studentRepository;
@@ -52,22 +54,4 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
 
-    @Override
-    public Set<Student> getAllStudentsForCourse(Long courseId) {
-        Optional<Course> course = courseRepository.findById(courseId);
-        if (course.isPresent()) {
-            return course.get().getStudents();
-        }
-        return null;
-    }
-
-    @Override
-    public Set<Student> getAllEnrolledCourses(Long studentId) {
-        return null;
-    }
-
-    @Override
-    public Set<Student> getAllStudentsForCourse(String courseName) {
-        return null;
-    }
 }

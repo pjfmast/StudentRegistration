@@ -34,6 +34,8 @@ public abstract class Student {
     private String name;
     private LocalDate dayOfBirth;
 
+    // todo workshop lesson 7-2a: add many-to-many relation between course and student
+
     /*
         Here, Student will be the parent entity,
         and we are using mappedBy="students" in the role entity.

@@ -1,7 +1,9 @@
-package avd.informatica.studentregistration.service;
+package avd.informatica.studentregistration.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+
+// todo workshop lesson 7-5: create RegistrationDTO
 
 @Getter
 @Setter

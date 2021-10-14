@@ -4,7 +4,6 @@ import avd.informatica.studentregistration.domain.Course;
 import avd.informatica.studentregistration.domain.Student;
 import avd.informatica.studentregistration.repository.CourseRepository;
 import avd.informatica.studentregistration.repository.StudentRepository;
-import avd.informatica.studentregistration.service.RegistrationDto;
 import avd.informatica.studentregistration.service.RegistrationService;
 import avd.informatica.studentregistration.service.RegistrationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

@@ -34,12 +34,14 @@ public class Course {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    // todo workshop lesson 7-1: add one-to-one relation between course and coordinator
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_coordinator_id")
     private CourseCoordinator courseCoordinator;
 
     // Add many-to-many relation between Course and Student.
     // performance advice ManyToMany: use Set<T> instead of List<T>
+    // todo workshop lesson 7-2b: add many-to-many relation between course and student
     @ManyToMany(mappedBy = "courses")
     private Set<Student> students;
 

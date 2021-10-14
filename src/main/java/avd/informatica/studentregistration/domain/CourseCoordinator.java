@@ -8,10 +8,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @lombok.Setter
 @lombok.Getter
+// todo workshop lesson 7-1: add one-to-one relation between course and coordinator
 public class CourseCoordinator {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;

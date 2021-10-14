@@ -1,10 +1,11 @@
 package avd.informatica.studentregistration.controller;
 
-import avd.informatica.studentregistration.service.RegistrationDto;
 import avd.informatica.studentregistration.service.RegistrationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+// todo workshop lesson 7-6: create RegistrationController
 
 @RestController
 @RequestMapping("/registration")
