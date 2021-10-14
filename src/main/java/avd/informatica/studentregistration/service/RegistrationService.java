@@ -7,7 +7,12 @@ import java.util.Set;
 
 public interface RegistrationService {
     boolean addRegistration(Long studentId, Long courseId);
-    List<Student> getAllStudentsForCourse(Long courseId);
-    List<Student> getAllEnrolledCourses(Long studentId);
-    List<Student> getAllStudentsForCourse(String courseName);
+
+    boolean removeRegistration(Long studentId, Long courseId);
+
+    Set<Student> getAllStudentsForCourse(Long courseId);
+
+    Set<Student> getAllEnrolledCourses(Long studentId);
+
+    Set<Student> getAllStudentsForCourse(String courseName);
 }

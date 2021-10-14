@@ -9,22 +9,42 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
-    @Resource
-    private StudentRepository studentRepository;
-    @Resource
-    private CourseRepository courseRepository;
+    private final StudentRepository studentRepository;
+    private final CourseRepository courseRepository;
+
+    public RegistrationServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository) {
+        this.studentRepository = studentRepository;
+        this.courseRepository = courseRepository;
+    }
 
     @Override
     public boolean addRegistration(Long studentId, Long courseId) {
-        Optional<Student> student = studentRepository.findById(studentId);
-        Optional<Course> course = courseRepository.findById(courseId);
+        Optional<Student> maybeStudent = studentRepository.findById(studentId);
+        Optional<Course> maybeCourse = courseRepository.findById(courseId);
 
-        if (student.isPresent() && course.isPresent()) {
-            student.get().addCourse(course.get());
-            studentRepository.save(student.get());
+        if (maybeStudent.isPresent() && maybeCourse.isPresent()) {
+            maybeStudent.get().addCourse(maybeCourse.get());
+            studentRepository.save(maybeStudent.get());
+            courseRepository.save(maybeCourse.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removeRegistration(Long studentId, Long courseId) {
+        Optional<Student> maybeStudent = studentRepository.findById(studentId);
+        Optional<Course> maybeCourse = courseRepository.findById(courseId);
+
+        if (maybeStudent.isPresent() && maybeCourse.isPresent()) {
+            maybeStudent.get().removeCourse(maybeCourse.get());
+            studentRepository.save(maybeStudent.get());
+            courseRepository.save(maybeCourse.get());
 
             return true;
         } else {
@@ -33,17 +53,21 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<Student> getAllStudentsForCourse(Long courseId) {
+    public Set<Student> getAllStudentsForCourse(Long courseId) {
+        Optional<Course> course = courseRepository.findById(courseId);
+        if (course.isPresent()) {
+            return course.get().getStudents();
+        }
         return null;
     }
 
     @Override
-    public List<Student> getAllEnrolledCourses(Long studentId) {
+    public Set<Student> getAllEnrolledCourses(Long studentId) {
         return null;
     }
 
     @Override
-    public List<Student> getAllStudentsForCourse(String courseName) {
+    public Set<Student> getAllStudentsForCourse(String courseName) {
         return null;
     }
 }

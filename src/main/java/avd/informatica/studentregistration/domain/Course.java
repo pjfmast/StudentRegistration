@@ -2,10 +2,11 @@ package avd.informatica.studentregistration.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+//import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,6 +18,7 @@ This new annotation, @JsonIdentityInfo, will handle the circular reference error
  */
 @lombok.Setter
 @lombok.Getter
+@NoArgsConstructor
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
@@ -32,7 +34,12 @@ public class Course {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    // Add many-to-many relation between Course and Student
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_coordinator_id")
+    private CourseCoordinator courseCoordinator;
+
+    // Add many-to-many relation between Course and Student.
+    // performance advice ManyToMany: use Set<T> instead of List<T>
     @ManyToMany(mappedBy = "courses")
     private Set<Student> students;
 
@@ -42,9 +49,6 @@ public class Course {
         this.capacity = capacity;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public Course() {
     }
 
 }
