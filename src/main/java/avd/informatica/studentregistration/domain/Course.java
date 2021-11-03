@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 //import java.util.List;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,6 +39,9 @@ public class Course {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_coordinator_id")
     private CourseCoordinator courseCoordinator;
+
+    @OneToMany
+    private List<Course> preKnowledge;
 
     // Add many-to-many relation between Course and Student.
     // performance advice ManyToMany: use Set<T> instead of List<T>
